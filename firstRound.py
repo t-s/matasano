@@ -40,7 +40,7 @@ s3 = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
 s3 = binascii.unhexlify(s3)
 score(s3)
 
-fopen = open('./1.dat','r')
+fopen = open('./firstRound.dat','r')
 for line in fopen:
   score(line.strip('\n'))
 
