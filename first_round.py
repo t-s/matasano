@@ -7,8 +7,16 @@ def hamming(left, right):
     right_string = ""
     diffs = 0
 
-    for a in left: left_string += bin(ord(a)).lstrip('0b')
-    for b in right: right_string += bin(ord(b)).lstrip('0b')
+    for a in left: 
+        bin_chars = bin(ord(a)).lstrip('0b')
+        if len(bin_chars) < 7:
+            bin_chars = "0" + bin_chars
+        left_string += bin_chars
+    for b in right: 
+        bin_chars = bin(ord(b)).lstrip('0b')
+        if len(bin_chars) < 7:
+            bin_chars = "0" + bin_chars
+        right_string += bin_chars
 
     for n in range(max(len(left_string),len(right_string))):
         if n >= len(left_string) or n >= len(right_string):
@@ -16,10 +24,6 @@ def hamming(left, right):
             break
         if(left_string[n] != right_string[n]):
             diffs = diffs + 1
-
-    print diffs
-    print left_string
-    print right_string
 
 def re_xor_encrypt(key, input_string):
     output_string = ""
