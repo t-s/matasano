@@ -2,10 +2,28 @@ import base64 as b64
 import string
 import binascii
 
+def hamming(left, right):
+    left_string = ""
+    right_string = ""
+    diffs = 0
+
+    for a in left: left_string += bin(ord(a)).lstrip('0b')
+    for b in right: right_string += bin(ord(b)).lstrip('0b')
+
+    for n in range(max(len(left_string),len(right_string))):
+        if n >= len(left_string) or n >= len(right_string):
+            diffs = diffs + 1
+            break
+        if(left_string[n] != right_string[n]):
+            diffs = diffs + 1
+
+    print diffs
+    print left_string
+    print right_string
+
 def re_xor_encrypt(key, input_string):
     output_string = ""
     for n in range(len(input_string)):
-        print strxor(key[n%len(key)],input_string[n])
         output_string += strxor(key[n%len(key)],input_string[n])
     print binascii.hexlify(output_string)
 
@@ -76,7 +94,7 @@ s3 = binascii.unhexlify(s3)
 score(s3)  
 
 
-fopen = open('./firstRound.dat','r')
+fopen = open('./first_round.dat','r')
 i = 0
 for line in fopen:
   score(binascii.unhexlify(line.strip('\n')))
@@ -84,3 +102,5 @@ for line in fopen:
 input_string = "Burning 'em, if you ain't quick and nimble \
 I go crazy when I hear a cymbal"
 re_xor_encrypt("ICE",input_string)  
+
+hamming("this is a test","wokka wokka!!!")
