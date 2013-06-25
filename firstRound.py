@@ -2,6 +2,16 @@ import base64 as b64
 import string
 import binascii
 
+def re_xor_encrypt(key, input_string):
+    output_string = ""
+    for n in range(len(input_string)):
+        print strxor(key[n%len(key)],input_string[n])
+        output_string += strxor(key[n%len(key)],input_string[n])
+    print binascii.hexlify(output_string)
+
+def re_xor_decrypt():
+    pass
+
 def strxor(left, right):
   letter = [chr(ord(a) ^ ord(b)) for a,b in zip(left, right)]
   return ''.join(letter)
@@ -70,3 +80,7 @@ fopen = open('./firstRound.dat','r')
 i = 0
 for line in fopen:
   score(binascii.unhexlify(line.strip('\n')))
+
+input_string = "Burning 'em, if you ain't quick and nimble \
+I go crazy when I hear a cymbal"
+re_xor_encrypt("ICE",input_string)  
